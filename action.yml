@@ -24,4 +24,4 @@ runs:
         npx markdownlint \
           --config ${{ github.action_path }}/config.yaml \
           --rules markdownlint-rule-titlecase \
-          docs/
+          ${{ github.workspace }}/docs/
