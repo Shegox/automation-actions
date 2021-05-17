@@ -1,0 +1,18 @@
+{
+  "name": "sap-composite-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "markdownlint-cli": "^0.27.1",
+    "markdownlint-rule-titlecase": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "lint": "markdownlint --config config.yaml --rules markdownlint-rule-titlecase",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

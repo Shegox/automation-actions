@@ -11,17 +11,10 @@ runs:
     - id: install_linter
       shell: bash
       name: Install linting tool and custom rule
-      run: |
-        npm install \
-          --no-package-lock \
-          --no-save \
-          markdownlint-cli@0.27.1 markdownlint-rule-titlecase@0.1.0
+      run: npm ci
 
     - id: run_linter
       shell: bash
       name: Run linter with specific rules, on the docs/ content
-      run: |
-        npx markdownlint \
-          --config ${{ github.action_path }}/config.yaml \
-          --rules markdownlint-rule-titlecase \
-          ${{ github.workspace }}/docs/
+      run: npm run lint -- ${{ github.workspace }}/docs/
+
