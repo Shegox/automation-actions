@@ -4,11 +4,13 @@ absolute_path=$(realpath $1)
 echo "$absolute_path"
 base_path=$2
 echo "$base_path"
+action_path=$3
+echo "$action_path"
 exit_code=0
 link_errors=""
 
 while IFS= read -r -d $'\0' file; do
-    link_check_result=$(node_modules/markdown-link-check/markdown-link-check -c config.json $file 2>&1)
+    link_check_result=$($action_path/node_modules/markdown-link-check/markdown-link-check -c $action_path/config.json $file 2>&1)
     link_check_exit_code=$?
     echo "$link_check_result"
     if [ "$link_check_exit_code" == 1 ]; then
