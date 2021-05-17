@@ -22,7 +22,7 @@ while IFS= read -r -d $'\0' file; do
         while IFS= read -r link_error; do
             # echo "ERROR:$file:$link_error"
             # echo "$relative_file"
-            link_errors_for_annotation=$(printf "$link_errors_for_annotation$link_error %0A")
+            link_errors_for_annotation=$(echo -n "$link_errors_for_annotation$link_error %0A")
             # echo "::error file=$relative_file,line=0,col=0::A link in this file seems to be broken.%0A$link_error"
         done < <(echo "$link_check_errors")
         echo "::error file=$relative_file,line=0,col=0::One or more links in this file seems to be broken. %0A$link_errors_for_annotation"
