@@ -9,12 +9,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - id: install_linter
+    - id: install_markdown_link_check
       shell: bash
-      name: Install linting tool and custom rule
+      name: Install install_markdown_link_check tool
       run: cd ${{ github.action_path }} && npm ci
 
     - id: run_linter
       shell: bash
-      name: Run linter with specific rules, on the docs/ content
-      run: cd ${{ inputs.markdown-directory }} && find . -name \*.md -exec ${{ github.action_path }}/node_modules/markdown-link-check/markdown-link-check -c ${{ github.action_path }}/config.json -q {} \;
+      name: Run install_markdown_link_check with specific rules, on the docs/ content
+      run: ./markdown-link-check.sh "${{ inputs.markdown-directory }}" "${{ github.workspace }}"
