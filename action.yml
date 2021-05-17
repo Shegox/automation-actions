@@ -11,10 +11,10 @@ runs:
     - id: install_linter
       shell: bash
       name: Install linting tool and custom rule
-      run: npm ci
+      run: cd ${{ github.action_path }} && npm ci
 
     - id: run_linter
       shell: bash
       name: Run linter with specific rules, on the docs/ content
-      run: npm run lint -- ${{ github.workspace }}/docs/
+      run: cd ${{ github.action_path }} &&  npm run lint -- ${{ github.workspace }}/docs/
 
