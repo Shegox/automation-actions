@@ -1,5 +1,11 @@
 name: "markdownlint"
 description: "Run preconfigured markdownlint with custom plugins"
+inputs:
+  markdown-directory:
+    description: 'markdown directory to lint'
+    required: true
+    default: ${{ github.workspace }}/docs/
+
 runs:
   using: "composite"
   steps:
@@ -16,5 +22,5 @@ runs:
     - id: run_linter
       shell: bash
       name: Run linter with specific rules, on the docs/ content
-      run: cd ${{ github.action_path }} &&  npm run lint -- ${{ github.workspace }}/docs/
+      run: cd ${{ github.action_path }} && npm run lint -- ${{ inputs.markdown-directory }}
 
