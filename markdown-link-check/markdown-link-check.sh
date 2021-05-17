@@ -1,11 +1,8 @@
 #!/bin/bash
 
 absolute_path=$(realpath $1)
-echo "$absolute_path"
 base_path=$2
-echo "$base_path"
 action_path=$3
-echo "$action_path"
 exit_code=0
 link_errors=""
 
@@ -21,6 +18,7 @@ while IFS= read -r -d $'\0' file; do
        # special output for problem matcher
         while IFS= read -r link_error; do
             # echo "ERROR:$file:$link_error"
+            echo "$file"
             echo "::error file=$(realpath --relative-to="$base_path" "$file"),line=0,col=0::$link_error"
         done < <(echo "$link_check_errors")
      fi
