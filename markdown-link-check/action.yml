@@ -1,0 +1,20 @@
+name: "markdown-link-check"
+description: "Run preconfigured markdown-link-check"
+inputs:
+  markdown-directory:
+    description: 'markdown directory to check links in'
+    required: true
+    default: ${{ github.workspace }}/docs/
+
+runs:
+  using: "composite"
+  steps:
+    - id: install_linter
+      shell: bash
+      name: Install linting tool and custom rule
+      run: cd ${{ github.action_path }} && npm ci
+
+    - id: run_linter
+      shell: bash
+      name: Run linter with specific rules, on the docs/ content
+      run: cd ${{ inputs.markdown-directory }} && find . -name \*.md -exec ${{ github.action_path }}/node_modules/markdown-link-check/markdown-link-check -c ${{ github.action_path }}/config.json -q {} \;
