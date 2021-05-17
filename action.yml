@@ -1,0 +1,27 @@
+name: "markdownlint"
+description: "Run preconfigured markdownlint with custom plugins"
+runs:
+  using: "composite"
+  steps:
+    - id: add_matcher
+      shell: bash
+      name: Add the matcher for markdownlint style message output
+      run: "echo ::add-matcher::${{ github.action_path }}/problem-matcher.json"
+
+    - id: install_linter
+      shell: bash
+      name: Install linting tool and custom rule
+      run: |
+        npm install \
+          --no-package-lock \
+          --no-save \
+          markdownlint-cli@0.27.1 markdownlint-rule-titlecase@0.1.0
+
+    - id: run_linter
+      shell: bash
+      name: Run linter with specific rules, on the docs/ content
+      run: |
+        npx markdownlint \
+          --config ${{ github.action_path }}/config.yaml \
+          --rules markdownlint-rule-titlecase \
+          docs/
