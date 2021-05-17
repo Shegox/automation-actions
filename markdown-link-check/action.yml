@@ -11,10 +11,10 @@ runs:
   steps:
     - id: install_markdown_link_check
       shell: bash
-      name: Install install_markdown_link_check tool
+      name: Install markdown_link_check tool
       run: cd ${{ github.action_path }} && npm ci
 
-    - id: run_linter
+    - id: run_install_markdown_link_check
       shell: bash
-      name: Run install_markdown_link_check with specific rules, on the docs/ content
-      run: ${{ github.action_path }}/markdown-link-check.sh "${{ inputs.markdown-directory }}" "${{ github.workspace }}"
+      name: Run markdown_link_check with specific rules, on the docs/ content
+      run: ${{ github.action_path }}/markdown-link-check.sh ${{ inputs.markdown-directory }} ${{ github.workspace }}
