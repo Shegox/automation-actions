@@ -23,4 +23,3 @@ runs:
       shell: bash
       name: Run linter with specific rules, on the docs/ content
       run: cd ${{ github.action_path }} && npm run lint -- ${{ inputs.markdown-directory }}
-
