@@ -17,4 +17,4 @@ runs:
     - id: run_linter
       shell: bash
       name: Run install_markdown_link_check with specific rules, on the docs/ content
-      run: ./markdown-link-check.sh "${{ inputs.markdown-directory }}" "${{ github.workspace }}"
+      run: ${{ github.action_path }}/markdown-link-check.sh "${{ inputs.markdown-directory }}" "${{ github.workspace }}"
