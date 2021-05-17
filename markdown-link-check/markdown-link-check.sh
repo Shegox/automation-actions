@@ -17,12 +17,15 @@ while IFS= read -r -d $'\0' file; do
         link_errors=$(printf "$link_errors\n\n$file\n$link_check_errors")
         relative_file=$(realpath --relative-to="$base_path" "$file")
         # special output for problem matcher
-        echo "::error file=$relative_file,line=0,col=0::One or more links in this file seems to be broken.%0A$link_check_errors"
+        link_errors_for_annotation=""
         while IFS= read -r link_error; do
             # echo "ERROR:$file:$link_error"
             echo "$relative_file"
+            link_errors_for_annotation=$(printf "$link_errors_for_annotation%0A$link_error")
             # echo "::error file=$relative_file,line=0,col=0::A link in this file seems to be broken.%0A$link_error"
         done < <(echo "$link_check_errors")
+        echo "::error file=$relative_file,line=0,col=0::One or more links in this file seems to be broken.%0A$link_errors_for_annotation"
+
      fi
 done < <(find $absolute_path -name '*.md' -print0) # use null seperator to allow for spaces in filename
 
