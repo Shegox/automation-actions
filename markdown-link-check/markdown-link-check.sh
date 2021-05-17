@@ -20,7 +20,7 @@ while IFS= read -r -d $'\0' file; do
         while IFS= read -r link_error; do
             # echo "ERROR:$file:$link_error"
             echo "$relative_file"
-            echo "::error file=$relative_file,line=0,col=0::A link in this file is broken.%0A$link_error"
+            echo "::error file=$relative_file,line=0,col=0::A link in this file seems to be broken.%0A$link_error"
         done < <(echo "$link_check_errors")
      fi
 done < <(find $absolute_path -name '*.md' -print0) # use null seperator to allow for spaces in filename
